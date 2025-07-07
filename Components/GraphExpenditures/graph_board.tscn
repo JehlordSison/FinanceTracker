@@ -1,0 +1,199 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfidqnpw7hgp8"]
+
+[ext_resource type="Script" uid="uid://djs8vfc40uiqp" path="res://Components/GraphExpenditures/graph_board.gd" id="1_7i3wl"]
+[ext_resource type="Script" uid="uid://b4iqc3pvghuc" path="res://Components/GraphExpenditures/data.gd" id="2_lxkux"]
+
+[node name="GraphBoard" type="Panel"]
+custom_minimum_size = Vector2(672, 456)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -48.0
+offset_bottom = -824.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7i3wl")
+metadata/_edit_lock_ = true
+
+[node name="AddTransactionBtn" type="Button" parent="."]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 16.0
+offset_right = 656.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 20
+text = "New"
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 247.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 20
+text = "[Graph Title]"
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.175
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 64.0
+offset_top = 8.2
+offset_right = -72.0
+offset_bottom = -56.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Box" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+offset_left = 64.0
+offset_top = 80.0
+offset_right = 89.0
+offset_bottom = 105.0
+
+[node name="LineGraph" type="Control" parent="."]
+anchors_preset = 0
+offset_left = 32.0
+offset_top = 80.0
+offset_right = 640.0
+offset_bottom = 424.0
+script = ExtResource("2_lxkux")
+metadata/_edit_lock_ = true
+
+[node name="HSplitContainer" type="HSplitContainer" parent="LineGraph"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -304.0
+offset_right = 304.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Y-axis" type="VBoxContainer" parent="LineGraph/HSplitContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LineGraph/HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 3
+
+[node name="VSplitContainer" type="VSplitContainer" parent="LineGraph/HSplitContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Line" type="Control" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="X" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+custom_minimum_size = Vector2(2, 0)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="Y" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="X-axis" type="HBoxContainer" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
+clip_contents = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Graph" type="Control" parent="."]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+offset_top = 164.0
+offset_bottom = 164.0
+
+[node name="B" type="Panel" parent="Graph"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="1" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 32.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="2" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 60.0
+offset_right = 68.0
+offset_bottom = 32.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="4" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 20.0
+offset_bottom = 32.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="5" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 36.0
+offset_top = 24.0
+offset_right = 44.0
+offset_bottom = 32.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="6" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 16.0
+offset_right = 56.0
+offset_bottom = 32.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="7" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 32.0
+offset_bottom = 48.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="8" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 72.0
+offset_top = 32.0
+offset_right = 80.0
+offset_bottom = 48.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="9" type="ColorRect" parent="Graph"]
+layout_mode = 0
+offset_left = 84.0
+offset_top = 32.0
+offset_right = 92.0
+offset_bottom = 64.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[connection signal="pressed" from="AddTransactionBtn" to="." method="_on_add_transaction_btn_pressed"]

@@ -1,0 +1,150 @@
+[gd_scene load_steps=12 format=3 uid="uid://c2dxuxghwen1u"]
+
+[ext_resource type="Texture2D" uid="uid://bj07cjwtqt4sw" path="res://Assets/notif_normal_icon.png" id="1_o4wlx"]
+[ext_resource type="Texture2D" uid="uid://bdmmsx2rhvirv" path="res://Assets/notif_pressed_icon.png" id="2_508y0"]
+[ext_resource type="Texture2D" uid="uid://coh6e5io7fe5t" path="res://Assets/profile_normal_icon.png" id="3_kc5j3"]
+[ext_resource type="Texture2D" uid="uid://j64csgvs0lwj" path="res://Assets/profile_pressed_icon.png" id="4_y5625"]
+[ext_resource type="Texture2D" uid="uid://dt471olm8v35r" path="res://Assets/budget_normal_icon.png" id="5_axlcc"]
+[ext_resource type="PackedScene" uid="uid://db23tgjmwjm1n" path="res://Components/expenditure_activities_panel.tscn" id="6_508y0"]
+[ext_resource type="Texture2D" uid="uid://cvfaxqak6a5hg" path="res://Assets/budget_pressed_icon.png" id="6_ynxm4"]
+[ext_resource type="Texture2D" uid="uid://1yk3ek3tpmfk" path="res://Assets/logs_normal_icon.png" id="7_1kru3"]
+[ext_resource type="Texture2D" uid="uid://dhg2dgpm530ij" path="res://Assets/logs_pressed_icon.png" id="8_dsyvb"]
+[ext_resource type="PackedScene" uid="uid://dfidqnpw7hgp8" path="res://Components/GraphExpenditures/graph_board.tscn" id="9_jcx8m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhb12"]
+bg_color = Color(0.26, 0.2288, 0.208, 1)
+
+[node name="DashboardPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_lhb12")
+metadata/_edit_lock_ = true
+
+[node name="Heading" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -104.0
+offset_top = 40.0
+offset_right = 111.0
+offset_bottom = 90.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Your Budget"
+
+[node name="NotifBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 112.0
+offset_bottom = 112.0
+texture_normal = ExtResource("1_o4wlx")
+texture_pressed = ExtResource("2_508y0")
+stretch_mode = 3
+
+[node name="ProfileBtn" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 32.0
+offset_right = 696.0
+offset_bottom = 112.0
+texture_normal = ExtResource("3_kc5j3")
+texture_pressed = ExtResource("4_y5625")
+stretch_mode = 3
+
+[node name="BalancePanel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 128.0
+offset_right = 360.0
+offset_bottom = 240.0
+
+[node name="Text" type="Label" parent="BalancePanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 107.0
+offset_bottom = 50.0
+theme_override_font_sizes/font_size = 20
+text = "Balance"
+metadata/_edit_lock_ = true
+
+[node name="Text2" type="Label" parent="BalancePanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 209.0
+offset_bottom = 90.0
+theme_override_font_sizes/font_size = 36
+text = "PHP 15,000"
+metadata/_edit_lock_ = true
+
+[node name="ExpenditureActivities" parent="." instance=ExtResource("6_508y0")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0
+anchor_top = 0.994
+anchor_right = 0.0
+anchor_bottom = 0.994
+offset_left = 24.0
+offset_top = -544.32
+offset_right = 696.0
+offset_bottom = -96.3201
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="GraphExpendituresPanel" parent="." instance=ExtResource("9_jcx8m")]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 256.0
+offset_right = -24.0
+offset_bottom = -568.0
+
+[node name="Menu" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -336.0
+offset_top = -88.0
+offset_right = 336.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+metadata/_edit_lock_ = true
+
+[node name="BudgetBtn" type="TextureButton" parent="Menu"]
+layout_mode = 0
+offset_right = 344.0
+offset_bottom = 64.0
+texture_normal = ExtResource("5_axlcc")
+texture_pressed = ExtResource("6_ynxm4")
+stretch_mode = 3
+
+[node name="LogsBtn" type="TextureButton" parent="Menu"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -296.0
+offset_bottom = 64.0
+grow_horizontal = 0
+texture_normal = ExtResource("7_1kru3")
+texture_pressed = ExtResource("8_dsyvb")
+stretch_mode = 3

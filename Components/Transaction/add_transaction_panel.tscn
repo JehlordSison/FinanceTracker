@@ -1,0 +1,395 @@
+[gd_scene load_steps=7 format=3 uid="uid://cfeime0uakpxe"]
+
+[ext_resource type="Script" uid="uid://dljt08yxgdcav" path="res://Components/Transaction/add_transaction_panel.gd" id="1_8bee0"]
+[ext_resource type="Texture2D" uid="uid://b8emsptw58mxa" path="res://Assets/profit_icon.png" id="2_6pw3u"]
+[ext_resource type="Script" uid="uid://byanmhpkpb4by" path="res://Components/Transaction/graph_panel.gd" id="2_pvoi1"]
+[ext_resource type="Texture2D" uid="uid://ccsx36q54g7rr" path="res://Assets/loss_icon.png" id="3_pvoi1"]
+
+[sub_resource type="Theme" id="Theme_pvoi1"]
+default_font_size = 20
+OptionButton/font_sizes/font_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pvoi1"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="AddTransactionPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+script = ExtResource("1_8bee0")
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.316785, 0.316785, 0.316785, 0.717647)
+metadata/_edit_lock_ = true
+
+[node name="CreatePanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -336.0
+offset_top = -256.0
+offset_right = 336.0
+offset_bottom = 280.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 1
+
+[node name="Layout" type="Panel" parent="CreatePanel"]
+layout_mode = 0
+offset_right = 672.0
+offset_bottom = 44.0
+metadata/_edit_lock_ = true
+
+[node name="Heading" type="Label" parent="CreatePanel"]
+layout_mode = 1
+offset_left = 352.0
+offset_top = 56.0
+offset_right = 600.0
+offset_bottom = 108.0
+theme_override_font_sizes/font_size = 36
+text = "Income Status"
+
+[node name="StatusOptionBtn" type="OptionButton" parent="CreatePanel"]
+layout_mode = 1
+offset_left = 352.0
+offset_top = 104.0
+offset_right = 480.0
+offset_bottom = 140.0
+theme = SubResource("Theme_pvoi1")
+theme_override_font_sizes/font_size = 20
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "Profit"
+popup/item_0/icon = ExtResource("2_6pw3u")
+popup/item_0/id = 0
+popup/item_1/text = "Loss"
+popup/item_1/icon = ExtResource("3_pvoi1")
+popup/item_1/id = 1
+
+[node name="GraphPanel" type="Panel" parent="CreatePanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 64.0
+offset_right = 336.0
+offset_bottom = 432.0
+script = ExtResource("2_pvoi1")
+
+[node name="Background" type="Panel" parent="CreatePanel/GraphPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 304.0
+offset_bottom = 304.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_pvoi1")
+metadata/_edit_lock_ = true
+
+[node name="GraphLbl" type="Label" parent="CreatePanel/GraphPanel"]
+layout_mode = 1
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 137.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 20
+text = "Movement"
+metadata/_edit_lock_ = true
+
+[node name="ProfitIcon" type="Line2D" parent="CreatePanel/GraphPanel"]
+visible = false
+position = Vector2(58, 102)
+points = PackedVector2Array(22, 114, 56, 64, 84, 104, 140, 36, 150, 50, 182, 18)
+default_color = Color(1.01075e-06, 0.773816, 0.341459, 1)
+metadata/_edit_lock_ = true
+
+[node name="LossIcon" type="Line2D" parent="CreatePanel/GraphPanel"]
+visible = false
+position = Vector2(58, 102)
+points = PackedVector2Array(30, 2, 54, 42, 100, 28, 152, 124, 190, 106)
+default_color = Color(0.88199, 5.51097e-06, 1.63645e-06, 1)
+metadata/_edit_lock_ = true
+
+[node name="DescriptionLbl" type="Label" parent="CreatePanel/GraphPanel"]
+layout_mode = 1
+offset_top = 320.0
+offset_right = 320.0
+offset_bottom = 354.0
+theme_override_font_sizes/font_size = 20
+text = "\"income is going up\""
+horizontal_alignment = 1
+
+[node name="DatePanel" type="Control" parent="CreatePanel"]
+anchors_preset = 0
+offset_left = 336.0
+offset_top = 160.0
+offset_right = 672.0
+offset_bottom = 240.0
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CreatePanel/DatePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 0.168627)
+
+[node name="DateLbl" type="Label" parent="CreatePanel/DatePanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 233.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+text = "Set date automatically"
+metadata/_edit_lock_ = true
+
+[node name="DateLbl2" type="Label" parent="CreatePanel/DatePanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 40.0
+offset_right = 68.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 20
+text = "Date:"
+metadata/_edit_lock_ = true
+
+[node name="DateEdit" type="LineEdit" parent="CreatePanel/DatePanel"]
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 2
+offset_left = 72.0
+offset_top = 36.0
+offset_right = 247.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 20
+placeholder_text = "mm/dd/yyyy"
+max_length = 10
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="DateCheckBtn" type="CheckButton" parent="CreatePanel/DatePanel"]
+layout_mode = 2
+offset_left = 240.0
+offset_top = 8.0
+offset_right = 284.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+metadata/_edit_lock_ = true
+
+[node name="TimePanel" type="Control" parent="CreatePanel"]
+anchors_preset = 0
+offset_left = 336.0
+offset_top = 256.0
+offset_right = 672.0
+offset_bottom = 336.0
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CreatePanel/TimePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 0.168627)
+
+[node name="TimeLbl" type="Label" parent="CreatePanel/TimePanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_right = 233.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 20
+text = "Set time automatically"
+metadata/_edit_lock_ = true
+
+[node name="TimeLbl2" type="Label" parent="CreatePanel/TimePanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 70.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 20
+text = "Time:"
+metadata/_edit_lock_ = true
+
+[node name="TimeEdit" type="LineEdit" parent="CreatePanel/TimePanel"]
+layout_mode = 2
+offset_left = 72.0
+offset_top = 28.0
+offset_right = 160.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 20
+placeholder_text = "00:00:00"
+max_length = 8
+flat = true
+
+[node name="TimeCheckBtn" type="CheckButton" parent="CreatePanel/TimePanel"]
+layout_mode = 2
+offset_left = 240.0
+offset_right = 284.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 20
+button_pressed = true
+metadata/_edit_lock_ = true
+
+[node name="TimeOptionBtn" type="OptionButton" parent="CreatePanel/TimePanel"]
+offset_left = 153.0
+offset_top = 28.0
+offset_right = 217.0
+offset_bottom = 64.0
+theme = SubResource("Theme_pvoi1")
+theme_override_font_sizes/font_size = 20
+flat = true
+alignment = 1
+selected = 0
+item_count = 2
+popup/item_0/text = "AM"
+popup/item_0/id = 0
+popup/item_1/text = "PM"
+popup/item_1/id = 1
+
+[node name="AmountPanel" type="Control" parent="CreatePanel"]
+anchors_preset = 0
+offset_left = 336.0
+offset_top = 344.0
+offset_right = 672.0
+offset_bottom = 424.0
+
+[node name="ColorRect" type="ColorRect" parent="CreatePanel/AmountPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -8.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 0, 1, 0.168627)
+
+[node name="Label" type="Label" parent="CreatePanel/AmountPanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_right = 208.0
+offset_bottom = 32.0
+theme_override_font_sizes/font_size = 20
+text = "Enter the amount"
+metadata/_edit_lock_ = true
+
+[node name="Label2" type="Label" parent="CreatePanel/AmountPanel"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 32.0
+offset_right = 116.0
+offset_bottom = 60.0
+theme_override_font_sizes/font_size = 20
+text = "Php:"
+metadata/_edit_lock_ = true
+
+[node name="AmountEdit" type="LineEdit" parent="CreatePanel/AmountPanel"]
+custom_minimum_size = Vector2(175, 0)
+layout_mode = 0
+offset_left = 72.0
+offset_top = 28.0
+offset_right = 247.0
+offset_bottom = 64.0
+theme_override_font_sizes/font_size = 20
+placeholder_text = "0.00"
+flat = true
+metadata/_edit_lock_ = true
+
+[node name="CreateBtn" type="Button" parent="CreatePanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -80.0
+offset_top = 188.0
+offset_right = 80.0
+offset_bottom = 244.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Create"
+
+[node name="CancelBtn" type="Button" parent="CreatePanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 44.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "x"
+flat = true
+
+[node name="ConfirmBtn" type="Button" parent="CreatePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -80.0
+offset_right = 200.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Confirm"
+
+[node name="EditBtn" type="Button" parent="CreatePanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -80.0
+offset_right = -40.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 20
+text = "Edit"
+
+[connection signal="item_selected" from="CreatePanel/StatusOptionBtn" to="." method="_on_status_option_btn_item_selected"]
+[connection signal="item_selected" from="CreatePanel/StatusOptionBtn" to="CreatePanel/GraphPanel" method="_on_status_option_btn_item_selected"]
+[connection signal="text_changed" from="CreatePanel/DatePanel/DateEdit" to="." method="_on_date_edit_text_changed"]
+[connection signal="toggled" from="CreatePanel/DatePanel/DateCheckBtn" to="." method="_on_date_check_btn_toggled"]
+[connection signal="text_changed" from="CreatePanel/TimePanel/TimeEdit" to="." method="_on_time_edit_text_changed"]
+[connection signal="toggled" from="CreatePanel/TimePanel/TimeCheckBtn" to="." method="_on_time_check_btn_toggled"]
+[connection signal="focus_exited" from="CreatePanel/AmountPanel/AmountEdit" to="." method="_on_amount_edit_focus_exited"]
+[connection signal="text_changed" from="CreatePanel/AmountPanel/AmountEdit" to="." method="_on_amount_edit_text_changed"]
+[connection signal="pressed" from="CreatePanel/CreateBtn" to="." method="_on_create_btn_pressed"]
+[connection signal="pressed" from="CreatePanel/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="CreatePanel/ConfirmBtn" to="." method="_on_confirm_btn_pressed"]
+[connection signal="pressed" from="CreatePanel/EditBtn" to="." method="_on_edit_btn_pressed"]
