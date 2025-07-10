@@ -2,10 +2,10 @@ extends Control
 
 var RECORDS: Dictionary = {
 	"06/30/2025": { 
-		"10:51:15 PM": 1.0
+		"10:51:15 PM": 500
 	},
 	"01/15/2024": {
-		"08:30:00 AM": 3.0
+		"08:30:00 AM": 3000
 	},
 	"03/01/2025": {
 		"02:06:30 PM": 1.0, 
@@ -22,13 +22,13 @@ var RECORDS: Dictionary = {
 		"07:00:00 AM": 56.0
 	},
 	"09/18/2025": {
-		"01:10:20 AM": 410.0
+		"01:10:20 AM": 4010.0
 	},
 	"04/03/2024": {
 		"11:59:59 PM": 500.00
 	},
 	"10/30/2024": {
-		"06:00:00 PM": 1334.00
+		"06:00:00 PM": 5334.00
 	},
 	"05/01/2025": {
 		"12:00:00 AM": 150.00
@@ -40,6 +40,7 @@ var RECORDS: Dictionary = {
 
 @onready var y_axis = $"HSplitContainer/Y-axis"
 @onready var x_axis = $"HSplitContainer/ScrollContainer/VSplitContainer/X-axis"
+@onready var line: Control = $HSplitContainer/ScrollContainer/VSplitContainer/Line
 
 @export_category("Y-Axis Settings")
 @export var y_segment_count: int = 5
@@ -94,6 +95,9 @@ func set_axis() -> void:
 		label.text = date
 		x_axis.add_child(label)
 	
+	#	Plotting Values
+	set_coordinates()
+	
 func round_up_to_nice_number(value: float) -> float:
 	if value <= 0:
 		return 0
@@ -111,3 +115,71 @@ func round_up_to_nice_number(value: float) -> float:
 	
 	# If none work, use the next magnitude
 	return magnitude * 10
+
+func set_coordinates() -> void:
+	# Wait for next frame to ensure layout is complete
+	await get_tree().process_frame
+	
+	var line_2d: Line2D = Line2D.new()
+	line.add_child(line_2d)
+	
+	# Get chart dimensions
+	var chart_width: float = line.size.x
+	var chart_height: float = line.size.y
+	
+	# Debug: Check if dimensions are valid
+	print("Chart dimensions: ", chart_width, " x ", chart_height)
+	
+	if chart_width <= 0 or chart_height <= 0:
+		print("Invalid chart dimensions - waiting longer...")
+		await get_tree().create_timer(0.1).timeout
+		chart_width = line.size.x
+		chart_height = line.size.y
+		print("New dimensions: ", chart_width, " x ", chart_height)
+	
+	# Get your Y-axis range (from your segments)
+	var amount_list: Array = []
+	for amount in RECORDS.values():
+		for i in amount.values():
+			amount_list.append(i)
+	
+	var max_amount: float = amount_list.max()
+	var y_max: float = round_up_to_nice_number(max_amount)  # Your ceiling (2000)
+	var y_min: float = 0.0
+	
+	# Get sorted dates for X-axis positioning
+	var sorted_dates: Array = RECORDS.keys()
+	sorted_dates.sort()
+	
+	# Plot each date's total amount
+	for date_index in range(sorted_dates.size()):
+		var date = sorted_dates[date_index]
+		
+		# Calculate total amount for this date
+		var total_amount: float = 0.0
+		for time_amount in RECORDS[date].values():
+			total_amount += time_amount
+		
+		# Convert to pixel coordinates
+		var pixel_pos = data_to_pixel_coords(date_index, total_amount, sorted_dates.size(), y_min, y_max, chart_width, chart_height)
+		line_2d.add_point(pixel_pos)
+		
+		# Debug: Print coordinates
+		print("Date: ", date, " Amount: ", total_amount, " Pixel: ", pixel_pos)
+	
+	# Style the line
+	line_2d.width = 2.0
+	line_2d.default_color = Color.GREEN
+	line_2d.antialiased = true
+
+func data_to_pixel_coords(x_index: int, y_value: float, total_x_points: int, y_min: float, y_max: float, chart_width: float, chart_height: float) -> Vector2:
+	# Normalize X position (0 to 1)
+	var x_normalized: float = float(x_index) / float(total_x_points - 1) if total_x_points > 1 else 0.0
+	var pixel_x: float = x_normalized * chart_width
+	
+	# Normalize Y position (0 to 1)
+	var y_normalized: float = (y_value - y_min) / (y_max - y_min)
+	var pixel_y: float = chart_height - (y_normalized * chart_height)  # Flip Y (0 at bottom)
+	
+	return Vector2(pixel_x, pixel_y)
+	

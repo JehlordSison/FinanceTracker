@@ -78,6 +78,7 @@ offset_left = -304.0
 offset_right = 304.0
 grow_horizontal = 2
 grow_vertical = 2
+dragging_enabled = false
 
 [node name="Y-axis" type="VBoxContainer" parent="LineGraph/HSplitContainer"]
 layout_mode = 2
@@ -91,10 +92,21 @@ horizontal_scroll_mode = 3
 [node name="VSplitContainer" type="VSplitContainer" parent="LineGraph/HSplitContainer/ScrollContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+dragging_enabled = false
 
 [node name="Line" type="Control" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+
+[node name="Background" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.112106, 0, 1)
 
 [node name="X" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
 custom_minimum_size = Vector2(2, 0)
@@ -104,6 +116,7 @@ anchor_bottom = 1.0
 grow_vertical = 2
 
 [node name="Y" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
 anchors_preset = 12
@@ -113,19 +126,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
+[node name="Line2D" type="Line2D" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+
 [node name="X-axis" type="HBoxContainer" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
 clip_contents = true
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Graph" type="Control" parent="."]
+[node name="CandleStick" type="Control" parent="."]
 visible = false
 layout_mode = 2
 anchors_preset = 0
 offset_top = 164.0
 offset_bottom = 164.0
 
-[node name="B" type="Panel" parent="Graph"]
+[node name="B" type="Panel" parent="CandleStick"]
 custom_minimum_size = Vector2(25, 25)
 layout_mode = 1
 anchors_preset = 15
@@ -135,20 +150,20 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="1" type="ColorRect" parent="Graph"]
+[node name="1" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 32.0
 color = Color(1.39579e-06, 0.787413, 0.118876, 1)
 
-[node name="2" type="ColorRect" parent="Graph"]
+[node name="2" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 60.0
 offset_right = 68.0
 offset_bottom = 32.0
 color = Color(1.39579e-06, 0.787413, 0.118876, 1)
 
-[node name="4" type="ColorRect" parent="Graph"]
+[node name="4" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 16.0
@@ -156,7 +171,7 @@ offset_right = 20.0
 offset_bottom = 32.0
 color = Color(1.39579e-06, 0.787413, 0.118876, 1)
 
-[node name="5" type="ColorRect" parent="Graph"]
+[node name="5" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 36.0
 offset_top = 24.0
@@ -164,7 +179,7 @@ offset_right = 44.0
 offset_bottom = 32.0
 color = Color(1.39579e-06, 0.787413, 0.118876, 1)
 
-[node name="6" type="ColorRect" parent="Graph"]
+[node name="6" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 48.0
 offset_top = 16.0
@@ -172,7 +187,7 @@ offset_right = 56.0
 offset_bottom = 32.0
 color = Color(1.39579e-06, 0.787413, 0.118876, 1)
 
-[node name="7" type="ColorRect" parent="Graph"]
+[node name="7" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 24.0
 offset_top = 32.0
@@ -180,7 +195,7 @@ offset_right = 32.0
 offset_bottom = 48.0
 color = Color(0.805373, 0.000107476, 0.112056, 1)
 
-[node name="8" type="ColorRect" parent="Graph"]
+[node name="8" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 72.0
 offset_top = 32.0
@@ -188,7 +203,7 @@ offset_right = 80.0
 offset_bottom = 48.0
 color = Color(0.805373, 0.000107476, 0.112056, 1)
 
-[node name="9" type="ColorRect" parent="Graph"]
+[node name="9" type="ColorRect" parent="CandleStick"]
 layout_mode = 0
 offset_left = 84.0
 offset_top = 32.0
