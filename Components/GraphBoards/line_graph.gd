@@ -48,7 +48,21 @@ var RECORDS: Dictionary = {
 func _ready():
 	sort_transactions()
 	set_axis()
-
+	
+func set_grid() -> void:
+	await get_tree().process_frame
+	#	Y-Axis
+	var g_size: int
+	for i in y_axis.get_children():
+		var grid_x: Line2D = Line2D.new()
+		grid_x.add_point(Vector2(2,i.position.y + (i.size.y/2)))
+		grid_x.add_point(Vector2(line.size.x,  i.position.y + (i.size.y/2)))
+		grid_x.width = 2
+		g_size += 1
+		grid_x.default_color = Color("005900")
+		if(g_size <= y_axis.get_children().size()-1):
+			line.add_child(grid_x)
+	
 func sort_transactions() -> void:
 	"
 		Dictionary 'MUST' Follow a format:
@@ -89,6 +103,8 @@ func set_axis() -> void:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		y_axis.add_child(label)
 	
+	set_grid()
+	
 	#	X-Axis
 	for date in RECORDS:
 		var label: Label = Label.new()
@@ -96,8 +112,8 @@ func set_axis() -> void:
 		x_axis.add_child(label)
 	
 	#	Plotting Values
-	set_coordinates()
-	
+	plot_coordinates()
+
 func round_up_to_nice_number(value: float) -> float:
 	if value <= 0:
 		return 0
@@ -116,7 +132,7 @@ func round_up_to_nice_number(value: float) -> float:
 	# If none work, use the next magnitude
 	return magnitude * 10
 
-func set_coordinates() -> void:
+func plot_coordinates() -> void:
 	# Wait for next frame to ensure layout is complete
 	await get_tree().process_frame
 	
@@ -128,14 +144,14 @@ func set_coordinates() -> void:
 	var chart_height: float = line.size.y
 	
 	# Debug: Check if dimensions are valid
-	print("Chart dimensions: ", chart_width, " x ", chart_height)
+	#print("Chart dimensions: ", chart_width, " x ", chart_height)
 	
 	if chart_width <= 0 or chart_height <= 0:
-		print("Invalid chart dimensions - waiting longer...")
+		#print("Invalid chart dimensions - waiting longer...")
 		await get_tree().create_timer(0.1).timeout
 		chart_width = line.size.x
 		chart_height = line.size.y
-		print("New dimensions: ", chart_width, " x ", chart_height)
+		#print("New dimensions: ", chart_width, " x ", chart_height)
 	
 	# Get your Y-axis range (from your segments)
 	var amount_list: Array = []
@@ -165,7 +181,7 @@ func set_coordinates() -> void:
 		line_2d.add_point(pixel_pos)
 		
 		# Debug: Print coordinates
-		print("Date: ", date, " Amount: ", total_amount, " Pixel: ", pixel_pos)
+		#print("Date: ", date, " Amount: ", total_amount, " Pixel: ", pixel_pos)
 	
 	# Style the line
 	line_2d.width = 2.0
@@ -182,4 +198,11 @@ func data_to_pixel_coords(x_index: int, y_value: float, total_x_points: int, y_m
 	var pixel_y: float = chart_height - (y_normalized * chart_height)  # Flip Y (0 at bottom)
 	
 	return Vector2(pixel_x, pixel_y)
+
+func update_plotted_coordinates() -> void:
+	for i in line.get_children():
+		if i is Line2D:
+			i.queue_free()
+	set_grid()
+	plot_coordinates()
 	

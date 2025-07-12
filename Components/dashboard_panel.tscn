@@ -1,34 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://c2dxuxghwen1u"]
+[gd_scene load_steps=12 format=3 uid="uid://c2dxuxghwen1u"]
 
 [ext_resource type="Texture2D" uid="uid://bj07cjwtqt4sw" path="res://Assets/notif_normal_icon.png" id="1_o4wlx"]
 [ext_resource type="Texture2D" uid="uid://bdmmsx2rhvirv" path="res://Assets/notif_pressed_icon.png" id="2_508y0"]
 [ext_resource type="Texture2D" uid="uid://coh6e5io7fe5t" path="res://Assets/profile_normal_icon.png" id="3_kc5j3"]
 [ext_resource type="Texture2D" uid="uid://j64csgvs0lwj" path="res://Assets/profile_pressed_icon.png" id="4_y5625"]
+[ext_resource type="PackedScene" uid="uid://di0bn0mt1mdqo" path="res://Components/GraphBoards/graph_boards.tscn" id="5_508y0"]
 [ext_resource type="Texture2D" uid="uid://dt471olm8v35r" path="res://Assets/budget_normal_icon.png" id="5_axlcc"]
 [ext_resource type="PackedScene" uid="uid://db23tgjmwjm1n" path="res://Components/expenditure_activities_panel.tscn" id="6_508y0"]
 [ext_resource type="Texture2D" uid="uid://cvfaxqak6a5hg" path="res://Assets/budget_pressed_icon.png" id="6_ynxm4"]
 [ext_resource type="Texture2D" uid="uid://1yk3ek3tpmfk" path="res://Assets/logs_normal_icon.png" id="7_1kru3"]
 [ext_resource type="Texture2D" uid="uid://dhg2dgpm530ij" path="res://Assets/logs_pressed_icon.png" id="8_dsyvb"]
-[ext_resource type="PackedScene" uid="uid://dfidqnpw7hgp8" path="res://Components/GraphExpenditures/graph_board.tscn" id="9_jcx8m"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhb12"]
 bg_color = Color(0.26, 0.2288, 0.208, 1)
-
-[sub_resource type="GDScript" id="GDScript_508y0"]
-script/source = "extends HBoxContainer
-
-@onready var h_box_container = $\"../ScrollContainer/HBoxContainer\"
-
-func _ready():
-	get_count()
-	
-func get_count() -> void:
-	for i in h_box_container.get_children():
-		var color_rect: ColorRect = ColorRect.new()
-		color_rect.custom_minimum_size = Vector2(8,8)
-		color_rect.size = Vector2(8,8)
-		add_child(color_rect)
-"
 
 [node name="DashboardPanel" type="Control"]
 layout_mode = 3
@@ -109,41 +93,7 @@ theme_override_font_sizes/font_size = 36
 text = "PHP 15,000"
 metadata/_edit_lock_ = true
 
-[node name="GraphBoards" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 24.0
-offset_top = 256.0
-offset_right = 696.0
-offset_bottom = 728.0
-metadata/_edit_lock_ = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="GraphBoards"]
-layout_mode = 0
-offset_right = 672.0
-offset_bottom = 456.0
-metadata/_edit_lock_ = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GraphBoards/ScrollContainer"]
-layout_mode = 2
-
-[node name="GraphExpendituresPanel" parent="GraphBoards/ScrollContainer/HBoxContainer" instance=ExtResource("9_jcx8m")]
-layout_mode = 2
-
-[node name="BoardCount" type="HBoxContainer" parent="GraphBoards"]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.975
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 3.79999
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 1
-script = SubResource("GDScript_508y0")
-
-[node name="ColorRect" type="ColorRect" parent="GraphBoards/BoardCount"]
-custom_minimum_size = Vector2(8, 8)
-layout_mode = 2
+[node name="GraphBoards" parent="." instance=ExtResource("5_508y0")]
 
 [node name="ExpenditureActivities" parent="." instance=ExtResource("6_508y0")]
 layout_mode = 1
@@ -153,9 +103,9 @@ anchor_top = 0.994
 anchor_right = 0.0
 anchor_bottom = 0.994
 offset_left = 24.0
-offset_top = -544.32
+offset_top = -456.32
 offset_right = 696.0
-offset_bottom = -96.3201
+offset_bottom = -92.3201
 grow_horizontal = 1
 grow_vertical = 1
 
@@ -193,3 +143,6 @@ grow_horizontal = 0
 texture_normal = ExtResource("7_1kru3")
 texture_pressed = ExtResource("8_dsyvb")
 stretch_mode = 3
+
+[editable path="GraphBoards"]
+[editable path="GraphBoards/ScrollContainer/HBoxContainer/Board"]

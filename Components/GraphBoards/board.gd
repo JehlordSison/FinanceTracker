@@ -13,3 +13,6 @@ func _on_full_screen_btn_pressed():
 
 func _on_add_transaction_btn_pressed():
 	Instances.add_transcation_panel($"../../../..")
+
+func _on_view_btn_pressed():
+	pass

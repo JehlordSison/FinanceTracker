@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=3 uid="uid://di0bn0mt1mdqo"]
+
+[ext_resource type="PackedScene" uid="uid://dfidqnpw7hgp8" path="res://Components/GraphBoards/board.tscn" id="1_g653s"]
+[ext_resource type="Script" uid="uid://b443rfb3u5bnk" path="res://Components/GraphBoards/graph_boards.gd" id="1_sptvm"]
+
+[sub_resource type="GDScript" id="GDScript_508y0"]
+script/source = "extends HBoxContainer
+
+@onready var h_box_container = $\"../ScrollContainer/HBoxContainer\"
+
+func _ready():
+	get_count()
+	
+func get_count() -> void:
+	for i in h_box_container.get_children():
+		var color_rect: ColorRect = ColorRect.new()
+		color_rect.custom_minimum_size = Vector2(8,8)
+		color_rect.size = Vector2(8,8)
+		add_child(color_rect)
+"
+
+[node name="GraphBoards" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 256.0
+offset_right = 696.0
+offset_bottom = 728.0
+script = ExtResource("1_sptvm")
+metadata/_edit_lock_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.059
+offset_bottom = 16.152
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Board" parent="ScrollContainer/HBoxContainer" instance=ExtResource("1_g653s")]
+layout_mode = 2
+
+[node name="BoardCount" type="HBoxContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.975
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 3.79999
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+script = SubResource("GDScript_508y0")
+
+[node name="ColorRect" type="ColorRect" parent="BoardCount"]
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 2
+
+[node name="ZoomOutBtn" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.068
+anchor_right = 1.0
+anchor_bottom = 1.068
+offset_left = -120.0
+offset_top = -56.096
+offset_right = -72.0
+offset_bottom = -8.09604
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "-
+"
+
+[node name="ZoomInBtn" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.068
+anchor_right = 1.0
+anchor_bottom = 1.068
+offset_left = -64.0
+offset_top = -56.096
+offset_right = -16.0
+offset_bottom = -8.09604
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "+"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 604.0
+offset_top = 480.0
+offset_right = 656.0
+offset_bottom = 496.0
+min_value = 15.0
+max_value = 40.0
+value = 15.0
+
+[node name="ZoomLbl" type="Label" parent="."]
+layout_mode = 0
+offset_left = 608.0
+offset_top = 456.0
+offset_right = 653.0
+offset_bottom = 479.0
+text = "Zoom"
+
+[connection signal="value_changed" from="HSlider" to="." method="_on_h_slider_value_changed"]
+
+[editable path="ScrollContainer/HBoxContainer/Board"]
