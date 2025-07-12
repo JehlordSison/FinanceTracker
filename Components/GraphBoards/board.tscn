@@ -28,7 +28,7 @@ offset_right = -16.0
 offset_bottom = 64.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
-text = "Add"
+text = "New"
 
 [node name="EditGraphBtn" type="TextureButton" parent="."]
 layout_mode = 1
@@ -64,7 +64,7 @@ offset_top = 20.0
 offset_right = 299.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 20
-text = "[Graph Title]"
+text = "Untitled Graph"
 vertical_alignment = 1
 
 [node name="LineGraph" type="Control" parent="."]
@@ -156,6 +156,7 @@ clip_contents = true
 layout_mode = 2
 mouse_filter = 0
 theme_override_constants/separation = 16
+alignment = 1
 
 [node name="CandleStickGraph" type="Control" parent="."]
 visible = false
@@ -235,8 +236,7 @@ offset_right = 92.0
 offset_bottom = 64.0
 color = Color(0.805373, 0.000107476, 0.112056, 1)
 
-[node name="EditGraphTitle" type="Control" parent="."]
-visible = false
+[node name="EditGraph" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -244,7 +244,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="EditGraphTitle"]
+[node name="ColorRect" type="ColorRect" parent="EditGraph"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -254,7 +254,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 0.764706)
 metadata/_edit_lock_ = true
 
-[node name="LineEdit" type="LineEdit" parent="EditGraphTitle"]
+[node name="LineEdit" type="LineEdit" parent="EditGraph"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -270,7 +270,7 @@ grow_vertical = 2
 placeholder_text = "[Enter Graph Title]"
 alignment = 1
 
-[node name="CancelBtn" type="Button" parent="EditGraphTitle"]
+[node name="CancelBtn" type="Button" parent="EditGraph"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -283,7 +283,7 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "Cancel"
 
-[node name="SaveBtn" type="Button" parent="EditGraphTitle"]
+[node name="SaveBtn" type="Button" parent="EditGraph"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -299,6 +299,6 @@ text = "Save"
 [connection signal="pressed" from="AddTransactionBtn" to="." method="_on_add_transaction_btn_pressed"]
 [connection signal="pressed" from="EditGraphBtn" to="." method="_on_edit_graph_btn_pressed"]
 [connection signal="pressed" from="ViewBtn" to="." method="_on_view_btn_pressed"]
-[connection signal="visibility_changed" from="EditGraphTitle" to="." method="_on_edit_graph_title_visibility_changed"]
-[connection signal="pressed" from="EditGraphTitle/CancelBtn" to="." method="_on_cancel_btn_pressed"]
-[connection signal="pressed" from="EditGraphTitle/SaveBtn" to="." method="_on_save_btn_pressed"]
+[connection signal="visibility_changed" from="EditGraph" to="." method="_on_edit_graph_visibility_changed"]
+[connection signal="pressed" from="EditGraph/CancelBtn" to="." method="_on_cancel_btn_pressed"]
+[connection signal="pressed" from="EditGraph/SaveBtn" to="." method="_on_save_btn_pressed"]

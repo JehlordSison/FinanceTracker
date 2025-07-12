@@ -1,5 +1,7 @@
 extends Control
 
+#var RECORDS: Dictionary = {}
+
 var RECORDS: Dictionary = {
 	"06/30/2025": { 
 		"10:51:15 PM": 500
@@ -40,15 +42,34 @@ var RECORDS: Dictionary = {
 
 @onready var y_axis = $"Y-axis"
 @onready var x_axis = $"ScrollContainer/VSplitContainer/X-axis"
-
 @onready var table = $ScrollContainer/VSplitContainer/Table
 
 @export_category("Y-Axis Settings")
 @export var y_segment_count: int = 5
 
 func _ready():
-	sort_transactions()
-	set_axis()
+	Handler.connect("update_record", on_update_record)
+	update_table()
+	
+func on_update_record() -> void:
+	RECORDS = Handler.RECORDS
+	update_table()
+
+func update_table() -> void:
+	if(RECORDS.size() > 0):
+		for y in y_axis.get_children():
+				y.queue_free()
+		for x in x_axis.get_children():
+			x.queue_free()
+		for i in table.get_children():
+			if i is Line2D:
+				i.queue_free()
+		for i in table.get_children():
+			if i is Polygon2D:
+				i.queue_free()	
+		sort_transactions()
+		set_grid()
+		set_axis()
 	
 func set_grid() -> void:
 	await get_tree().process_frame
@@ -62,10 +83,10 @@ func set_grid() -> void:
 		table.add_child(grid_x)
 	
 func sort_transactions() -> void:
-	"
-		Dictionary 'MUST' Follow a format:
-		var DICTIONARY = { DATE: {TIME: AMOUNT,}, }
-	"
+	#
+		#Dictionary 'MUST' Follow a format:
+		#var DICTIONARY = { DATE: {TIME: AMOUNT,}, }
+	#
 	#	Sort time in each transactions
 	var new_record: Dictionary = RECORDS
 	for date in new_record:
@@ -166,29 +187,46 @@ func plot_coordinates() -> void:
 	# Get the baseline Y position (where y_value = 0)
 	var baseline_y: float = get_y_position_from_labels(0.0, y_min, y_max)
 	
-	# Add starting point at baseline (bottom-left corner of the filled area)
-	if sorted_dates.size() > 0:
-		var first_x = data_to_pixel_coords(0, 0.0, sorted_dates.size(), y_min, y_max, chart_width).x
-		poly_points.append(Vector2(first_x, baseline_y))
-	
-	# Plot each date's total amount
+	# Create array of all transaction points (date_index, time, amount)
+	var all_transactions: Array = []
 	for date_index in range(sorted_dates.size()):
 		var date = sorted_dates[date_index]
+		var times = RECORDS[date].keys()
+		times.sort()  # Sort times within the day
 		
-		# Calculate total amount for this date
-		var total_amount: float = 0.0
-		for time_amount in RECORDS[date].values():
-			total_amount += time_amount
+		# Add each transaction as a separate point
+		for time_index in range(times.size()):
+			var time = times[time_index]
+			var amount = RECORDS[date][time]
+			
+			# Calculate X position: spread transactions across the day's width
+			var day_width = chart_width / sorted_dates.size()
+			var transaction_spacing = day_width / (times.size() + 1)  # +1 for padding
+			var x_pos = (date_index * day_width) + ((time_index + 1) * transaction_spacing)
+			
+			all_transactions.append({
+				"x_pos": x_pos,
+				"amount": amount,
+				"date_index": date_index,
+				"time_index": time_index
+			})
+	
+	# Add starting point at baseline (bottom-left corner of the filled area)
+	if all_transactions.size() > 0:
+		poly_points.append(Vector2(all_transactions[0]["x_pos"], baseline_y))
+	
+	# Plot each individual transaction
+	for transaction in all_transactions:
+		var pixel_y = get_y_position_from_labels(transaction["amount"], y_min, y_max)
+		var pixel_pos = Vector2(transaction["x_pos"], pixel_y)
 		
-		# Convert to pixel coordinates
-		var pixel_pos = data_to_pixel_coords(date_index, total_amount, sorted_dates.size(), y_min, y_max, chart_width)
 		line_2d.add_point(pixel_pos)
 		poly_points.append(pixel_pos)
 	
 	# Close the polygon by adding the end point at baseline (bottom-right corner)
-	if sorted_dates.size() > 0:
-		var last_x = data_to_pixel_coords(sorted_dates.size() - 1, 0.0, sorted_dates.size(), y_min, y_max, chart_width).x
-		poly_points.append(Vector2(last_x, baseline_y))
+	if all_transactions.size() > 0:
+		var last_transaction = all_transactions[all_transactions.size() - 1]
+		poly_points.append(Vector2(last_transaction["x_pos"], baseline_y))
 	
 	# Apply the polygon points
 	polygon_2d.polygon = poly_points
@@ -245,14 +283,3 @@ func get_y_position_from_labels(y_value: float, y_min: float, y_max: float) -> f
 		
 		var interpolation_factor = segment_index - lower_index
 		return lerp(lower_y, upper_y, interpolation_factor)
-
-func update_plotted_coordinates() -> void:
-	for i in table.get_children():
-		if i is Line2D:
-			i.queue_free()
-	for i in table.get_children():
-		if i is Polygon2D:
-			i.queue_free()	
-	set_grid()
-	set_axis()
-	
