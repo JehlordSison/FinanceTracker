@@ -1,7 +1,16 @@
 extends Control
 
 @onready var h_box_container = $ScrollContainer/HBoxContainer
-@onready var zoom_lbl = $ZoomLbl
+@onready var h_slider = $Zoom/HSlider
+@onready var zoom_lbl = $Zoom/ZoomLbl
+@onready var zoom = $Zoom
+
+func _ready():
+	for i in h_box_container.get_children():
+		h_box_container.get_node("Board").connect("graph_edit", graph_edit_visibility)
+
+func graph_edit_visibility(visibility: bool):
+	zoom.visible = !visibility
 
 func _on_h_slider_value_changed(value):
 	set_zoom(value)
@@ -24,9 +33,8 @@ func set_zoom(value: int) -> void:
 		y_axis.set("theme_override_constants/separation", separation_percent)
 		
 		line_graph.y_segment_count = segment_percent
-		line_graph.set_axis()
+		#line_graph.set_axis()
 		line_graph.update_plotted_coordinates()
-		#	15 min 40 max for separation - 5 min 10 max for segments
-	
+		
 
 	

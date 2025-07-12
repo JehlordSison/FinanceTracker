@@ -1,10 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://dfidqnpw7hgp8"]
+[gd_scene load_steps=5 format=3 uid="uid://dfidqnpw7hgp8"]
 
 [ext_resource type="Script" uid="uid://djs8vfc40uiqp" path="res://Components/GraphBoards/board.gd" id="1_2jgq7"]
-[ext_resource type="Texture2D" uid="uid://clxsnr4if2qcq" path="res://Assets/edit_normal.png" id="2_jsc4h"]
 [ext_resource type="Script" uid="uid://b4iqc3pvghuc" path="res://Components/GraphBoards/line_graph.gd" id="2_lpp80"]
-[ext_resource type="Texture2D" uid="uid://dxad7q460flo8" path="res://Assets/edit_pressed.png" id="3_3bu43"]
 [ext_resource type="Script" uid="uid://mxx0qdb4twe2" path="res://Components/GraphBoards/table.gd" id="3_lpp80"]
+
+[sub_resource type="Theme" id="Theme_2jgq7"]
+default_font_size = 20
+MenuButton/font_sizes/font_size = 20
+MenuButton/fonts/font = null
 
 [node name="Board" type="Panel"]
 custom_minimum_size = Vector2(672, 504)
@@ -12,7 +15,7 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -48.0
-offset_bottom = -776.0
+offset_bottom = -800.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2jgq7")
@@ -28,20 +31,7 @@ offset_right = -16.0
 offset_bottom = 64.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
-text = "Add"
-
-[node name="EditGraphBtn" type="TextureButton" parent="."]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -644.0
-offset_top = 24.0
-offset_right = -612.0
-offset_bottom = 56.0
-grow_horizontal = 0
-texture_normal = ExtResource("2_jsc4h")
-texture_pressed = ExtResource("3_3bu43")
+text = "New"
 
 [node name="ViewBtn" type="Button" parent="."]
 visible = false
@@ -57,11 +47,28 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 20
 text = "View"
 
+[node name="MenuButton" type="MenuButton" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 544.0
+offset_top = 16.0
+offset_right = 656.0
+offset_bottom = 64.0
+theme = SubResource("Theme_2jgq7")
+theme_override_font_sizes/font_size = 20
+text = "New"
+flat = false
+item_count = 2
+popup/item_0/text = "Tae"
+popup/item_0/id = 0
+popup/item_1/text = "Tubol"
+popup/item_1/id = 1
+
 [node name="GraphLbl" type="Label" parent="."]
 layout_mode = 0
-offset_left = 68.0
+offset_left = 16.0
 offset_top = 20.0
-offset_right = 299.0
+offset_right = 247.0
 offset_bottom = 60.0
 theme_override_font_sizes/font_size = 20
 text = "[Graph Title]"
@@ -71,9 +78,9 @@ vertical_alignment = 1
 layout_mode = 1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -312.0
+offset_left = -304.0
 offset_top = 80.0
-offset_right = 312.0
+offset_right = 304.0
 offset_bottom = 439.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -103,7 +110,7 @@ theme_override_constants/separation = 40
 layout_mode = 2
 offset_left = 76.0
 offset_top = 12.0
-offset_right = 608.0
+offset_right = 592.0
 offset_bottom = 12.0
 size_flags_horizontal = 3
 mouse_filter = 0
@@ -235,70 +242,5 @@ offset_right = 92.0
 offset_bottom = 64.0
 color = Color(0.805373, 0.000107476, 0.112056, 1)
 
-[node name="EditGraphTitle" type="Control" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ColorRect" type="ColorRect" parent="EditGraphTitle"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.764706)
-metadata/_edit_lock_ = true
-
-[node name="LineEdit" type="LineEdit" parent="EditGraphTitle"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -144.0
-offset_top = -52.0
-offset_right = 144.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
-placeholder_text = "[Enter Graph Title]"
-alignment = 1
-
-[node name="CancelBtn" type="Button" parent="EditGraphTitle"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -460.0
-offset_top = 268.0
-offset_right = -348.0
-offset_bottom = 316.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Cancel"
-
-[node name="SaveBtn" type="Button" parent="EditGraphTitle"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -320.0
-offset_top = 268.0
-offset_right = -208.0
-offset_bottom = 316.0
-grow_horizontal = 0
-theme_override_font_sizes/font_size = 20
-text = "Save"
-
 [connection signal="pressed" from="AddTransactionBtn" to="." method="_on_add_transaction_btn_pressed"]
-[connection signal="pressed" from="EditGraphBtn" to="." method="_on_edit_graph_btn_pressed"]
 [connection signal="pressed" from="ViewBtn" to="." method="_on_view_btn_pressed"]
-[connection signal="visibility_changed" from="EditGraphTitle" to="." method="_on_edit_graph_title_visibility_changed"]
-[connection signal="pressed" from="EditGraphTitle/CancelBtn" to="." method="_on_cancel_btn_pressed"]
-[connection signal="pressed" from="EditGraphTitle/SaveBtn" to="." method="_on_save_btn_pressed"]

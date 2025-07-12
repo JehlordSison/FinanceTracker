@@ -16,10 +16,10 @@ var RECORDS: Dictionary = {
 		"09:15:40 AM": 5.0
 	},
 	"11/05/2025": {
-		"04:45:00 PM": 200.00
+		"04:45:00 PM": 3000.00
 	},
 	"02/10/2024": {
-		"07:00:00 AM": 56.0
+		"07:00:00 AM": 8000.0
 	},
 	"09/18/2025": {
 		"01:10:20 AM": 4010.0
@@ -97,7 +97,7 @@ func set_axis() -> void:
 	#	Y-Axis
 	for i in segments:
 		var label: Label = Label.new()
-		label.text = str( i)
+		label.text = str(int(i))
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		y_axis.add_child(label)
 	
@@ -168,7 +168,7 @@ func plot_coordinates() -> void:
 	
 	# Add starting point at baseline (bottom-left corner of the filled area)
 	if sorted_dates.size() > 0:
-		var first_x = data_to_pixel_coords(0, 0.0, sorted_dates.size(), y_min, y_max, chart_width, chart_height).x
+		var first_x = data_to_pixel_coords(0, 0.0, sorted_dates.size(), y_min, y_max, chart_width).x
 		poly_points.append(Vector2(first_x, baseline_y))
 	
 	# Plot each date's total amount
@@ -181,13 +181,13 @@ func plot_coordinates() -> void:
 			total_amount += time_amount
 		
 		# Convert to pixel coordinates
-		var pixel_pos = data_to_pixel_coords(date_index, total_amount, sorted_dates.size(), y_min, y_max, chart_width, chart_height)
+		var pixel_pos = data_to_pixel_coords(date_index, total_amount, sorted_dates.size(), y_min, y_max, chart_width)
 		line_2d.add_point(pixel_pos)
 		poly_points.append(pixel_pos)
 	
 	# Close the polygon by adding the end point at baseline (bottom-right corner)
 	if sorted_dates.size() > 0:
-		var last_x = data_to_pixel_coords(sorted_dates.size() - 1, 0.0, sorted_dates.size(), y_min, y_max, chart_width, chart_height).x
+		var last_x = data_to_pixel_coords(sorted_dates.size() - 1, 0.0, sorted_dates.size(), y_min, y_max, chart_width).x
 		poly_points.append(Vector2(last_x, baseline_y))
 	
 	# Apply the polygon points
@@ -200,7 +200,7 @@ func plot_coordinates() -> void:
 	line_2d.default_color = Color.GREEN
 	line_2d.antialiased = true
 
-func data_to_pixel_coords(x_index: int, y_value: float, total_x_points: int, y_min: float, y_max: float, chart_width: float, chart_height: float) -> Vector2:
+func data_to_pixel_coords(x_index: int, y_value: float, total_x_points: int, y_min: float, y_max: float, chart_width: float) -> Vector2:
 	# Normalize X position (0 to 1)
 	var x_normalized: float = float(x_index) / float(total_x_points - 1) if total_x_points > 1 else 0.0
 	var pixel_x: float = x_normalized * chart_width
@@ -248,8 +248,11 @@ func get_y_position_from_labels(y_value: float, y_min: float, y_max: float) -> f
 
 func update_plotted_coordinates() -> void:
 	for i in table.get_children():
-		if i is Line2D or i is Polygon2D:
+		if i is Line2D:
 			i.queue_free()
+	for i in table.get_children():
+		if i is Polygon2D:
+			i.queue_free()	
 	set_grid()
-	plot_coordinates()
+	set_axis()
 	
