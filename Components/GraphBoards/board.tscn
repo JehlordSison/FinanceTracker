@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfidqnpw7hgp8"]
+[gd_scene load_steps=5 format=3 uid="uid://dfidqnpw7hgp8"]
 
 [ext_resource type="Script" uid="uid://djs8vfc40uiqp" path="res://Components/GraphBoards/board.gd" id="1_2jgq7"]
 [ext_resource type="Script" uid="uid://b4iqc3pvghuc" path="res://Components/GraphBoards/line_graph.gd" id="2_lpp80"]
+[ext_resource type="Script" uid="uid://mxx0qdb4twe2" path="res://Components/GraphBoards/table.gd" id="3_lpp80"]
 
 [sub_resource type="Theme" id="Theme_2jgq7"]
 default_font_size = 20
@@ -9,12 +10,12 @@ MenuButton/font_sizes/font_size = 20
 MenuButton/fonts/font = null
 
 [node name="Board" type="Panel"]
-custom_minimum_size = Vector2(672, 472)
+custom_minimum_size = Vector2(672, 504)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = -48.0
-offset_bottom = -772.0
+offset_bottom = -800.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_2jgq7")
@@ -66,9 +67,9 @@ popup/item_1/id = 1
 [node name="GraphLbl" type="Label" parent="."]
 layout_mode = 0
 offset_left = 16.0
-offset_top = 16.0
+offset_top = 20.0
 offset_right = 247.0
-offset_bottom = 50.0
+offset_bottom = 60.0
 theme_override_font_sizes/font_size = 20
 text = "[Graph Title]"
 vertical_alignment = 1
@@ -76,71 +77,77 @@ vertical_alignment = 1
 [node name="LineGraph" type="Control" parent="."]
 layout_mode = 1
 anchor_left = 0.5
-anchor_top = 0.534
 anchor_right = 0.5
-anchor_bottom = 0.534
 offset_left = -304.0
-offset_top = -191.272
+offset_top = 80.0
 offset_right = 304.0
-offset_bottom = 160.728
+offset_bottom = 439.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 script = ExtResource("2_lpp80")
 
 [node name="ColorRect" type="ColorRect" parent="LineGraph"]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.0781564, 0.0781564, 0.0781564, 1)
 metadata/_edit_lock_ = true
 
-[node name="HSplitContainer" type="HSplitContainer" parent="LineGraph"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -304.0
-offset_right = 304.0
-grow_horizontal = 2
-dragging_enabled = false
-
-[node name="Y-axis" type="VBoxContainer" parent="LineGraph/HSplitContainer"]
+[node name="Y-axis" type="VBoxContainer" parent="LineGraph"]
 layout_mode = 2
-theme_override_constants/separation = 15
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 8.0
+offset_bottom = 12.0
+theme_override_constants/separation = 40
 
-[node name="ScrollContainer" type="ScrollContainer" parent="LineGraph/HSplitContainer"]
+[node name="ScrollContainer" type="ScrollContainer" parent="LineGraph"]
+layout_mode = 2
+offset_left = 76.0
+offset_top = 12.0
+offset_right = 592.0
+offset_bottom = 12.0
+size_flags_horizontal = 3
+mouse_filter = 0
+draw_focus_border = true
+horizontal_scroll_mode = 2
+
+[node name="VSplitContainer" type="VSplitContainer" parent="LineGraph/ScrollContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-horizontal_scroll_mode = 3
-
-[node name="VSplitContainer" type="VSplitContainer" parent="LineGraph/HSplitContainer/ScrollContainer"]
-layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 0
 dragging_enabled = false
 
-[node name="Line" type="Control" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
+[node name="Table" type="Control" parent="LineGraph/ScrollContainer/VSplitContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("3_lpp80")
 
-[node name="Background" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+[node name="Background" type="ColorRect" parent="LineGraph/ScrollContainer/VSplitContainer/Table"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0, 0.112106, 0, 1)
 
-[node name="X" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+[node name="X" type="ColorRect" parent="LineGraph/ScrollContainer/VSplitContainer/Table"]
+visible = false
 custom_minimum_size = Vector2(2, 0)
 layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 grow_vertical = 2
 
-[node name="Y" type="ColorRect" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer/Line"]
+[node name="Y" type="ColorRect" parent="LineGraph/ScrollContainer/VSplitContainer/Table"]
 visible = false
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 1
@@ -151,9 +158,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="X-axis" type="HBoxContainer" parent="LineGraph/HSplitContainer/ScrollContainer/VSplitContainer"]
+[node name="X-axis" type="HBoxContainer" parent="LineGraph/ScrollContainer/VSplitContainer"]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 0
 theme_override_constants/separation = 16
 
 [node name="CandleStickGraph" type="Control" parent="."]

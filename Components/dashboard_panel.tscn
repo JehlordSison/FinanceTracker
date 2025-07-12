@@ -94,6 +94,11 @@ text = "PHP 15,000"
 metadata/_edit_lock_ = true
 
 [node name="GraphBoards" parent="." instance=ExtResource("5_508y0")]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 256.0
+offset_right = 27.84
+offset_bottom = 251.68
 
 [node name="ExpenditureActivities" parent="." instance=ExtResource("6_508y0")]
 layout_mode = 1
@@ -143,6 +148,3 @@ grow_horizontal = 0
 texture_normal = ExtResource("7_1kru3")
 texture_pressed = ExtResource("8_dsyvb")
 stretch_mode = 3
-
-[editable path="GraphBoards"]
-[editable path="GraphBoards/ScrollContainer/HBoxContainer/Board"]

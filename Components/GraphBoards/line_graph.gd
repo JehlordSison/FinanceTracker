@@ -38,9 +38,10 @@ var RECORDS: Dictionary = {
 	}
 }
 
-@onready var y_axis = $"HSplitContainer/Y-axis"
-@onready var x_axis = $"HSplitContainer/ScrollContainer/VSplitContainer/X-axis"
-@onready var line: Control = $HSplitContainer/ScrollContainer/VSplitContainer/Line
+@onready var y_axis = $"Y-axis"
+@onready var x_axis = $"ScrollContainer/VSplitContainer/X-axis"
+
+@onready var table = $ScrollContainer/VSplitContainer/Table
 
 @export_category("Y-Axis Settings")
 @export var y_segment_count: int = 5
@@ -52,16 +53,13 @@ func _ready():
 func set_grid() -> void:
 	await get_tree().process_frame
 	#	Y-Axis
-	var g_size: int
 	for i in y_axis.get_children():
 		var grid_x: Line2D = Line2D.new()
 		grid_x.add_point(Vector2(2,i.position.y + (i.size.y/2)))
-		grid_x.add_point(Vector2(line.size.x,  i.position.y + (i.size.y/2)))
+		grid_x.add_point(Vector2(table.size.x,  i.position.y + (i.size.y/2)))
 		grid_x.width = 2
-		g_size += 1
 		grid_x.default_color = Color("005900")
-		if(g_size <= y_axis.get_children().size()-1):
-			line.add_child(grid_x)
+		table.add_child(grid_x)
 	
 func sort_transactions() -> void:
 	"
@@ -99,7 +97,7 @@ func set_axis() -> void:
 	#	Y-Axis
 	for i in segments:
 		var label: Label = Label.new()
-		label.text = str(i)
+		label.text = str( i)
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		y_axis.add_child(label)
 	
@@ -137,21 +135,19 @@ func plot_coordinates() -> void:
 	await get_tree().process_frame
 	
 	var line_2d: Line2D = Line2D.new()
-	line.add_child(line_2d)
+	var polygon_2d: Polygon2D = Polygon2D.new()
+	var poly_points: PackedVector2Array = []
+	table.add_child(line_2d)
 	
 	# Get chart dimensions
-	var chart_width: float = line.size.x
-	var chart_height: float = line.size.y
+	var chart_width: float = table.size.x
+	var chart_height: float = table.size.y
 	
 	# Debug: Check if dimensions are valid
-	#print("Chart dimensions: ", chart_width, " x ", chart_height)
-	
 	if chart_width <= 0 or chart_height <= 0:
-		#print("Invalid chart dimensions - waiting longer...")
 		await get_tree().create_timer(0.1).timeout
-		chart_width = line.size.x
-		chart_height = line.size.y
-		#print("New dimensions: ", chart_width, " x ", chart_height)
+		chart_width = table.size.x
+		chart_height = table.size.y
 	
 	# Get your Y-axis range (from your segments)
 	var amount_list: Array = []
@@ -160,12 +156,20 @@ func plot_coordinates() -> void:
 			amount_list.append(i)
 	
 	var max_amount: float = amount_list.max()
-	var y_max: float = round_up_to_nice_number(max_amount)  # Your ceiling (2000)
+	var y_max: float = round_up_to_nice_number(max_amount)  # Your ceiling
 	var y_min: float = 0.0
 	
 	# Get sorted dates for X-axis positioning
 	var sorted_dates: Array = RECORDS.keys()
 	sorted_dates.sort()
+	
+	# Get the baseline Y position (where y_value = 0)
+	var baseline_y: float = get_y_position_from_labels(0.0, y_min, y_max)
+	
+	# Add starting point at baseline (bottom-left corner of the filled area)
+	if sorted_dates.size() > 0:
+		var first_x = data_to_pixel_coords(0, 0.0, sorted_dates.size(), y_min, y_max, chart_width, chart_height).x
+		poly_points.append(Vector2(first_x, baseline_y))
 	
 	# Plot each date's total amount
 	for date_index in range(sorted_dates.size()):
@@ -179,11 +183,19 @@ func plot_coordinates() -> void:
 		# Convert to pixel coordinates
 		var pixel_pos = data_to_pixel_coords(date_index, total_amount, sorted_dates.size(), y_min, y_max, chart_width, chart_height)
 		line_2d.add_point(pixel_pos)
-		
-		# Debug: Print coordinates
-		#print("Date: ", date, " Amount: ", total_amount, " Pixel: ", pixel_pos)
+		poly_points.append(pixel_pos)
 	
-	# Style the line
+	# Close the polygon by adding the end point at baseline (bottom-right corner)
+	if sorted_dates.size() > 0:
+		var last_x = data_to_pixel_coords(sorted_dates.size() - 1, 0.0, sorted_dates.size(), y_min, y_max, chart_width, chart_height).x
+		poly_points.append(Vector2(last_x, baseline_y))
+	
+	# Apply the polygon points
+	polygon_2d.polygon = poly_points
+	table.add_child(polygon_2d)
+	
+	# Style
+	polygon_2d.color = Color(0, 1, 0, 0.3)  # Semi-transparent green
 	line_2d.width = 2.0
 	line_2d.default_color = Color.GREEN
 	line_2d.antialiased = true
@@ -193,15 +205,50 @@ func data_to_pixel_coords(x_index: int, y_value: float, total_x_points: int, y_m
 	var x_normalized: float = float(x_index) / float(total_x_points - 1) if total_x_points > 1 else 0.0
 	var pixel_x: float = x_normalized * chart_width
 	
-	# Normalize Y position (0 to 1)
-	var y_normalized: float = (y_value - y_min) / (y_max - y_min)
-	var pixel_y: float = chart_height - (y_normalized * chart_height)  # Flip Y (0 at bottom)
+	# Get Y position based on actual Y-axis label positions
+	var pixel_y: float = get_y_position_from_labels(y_value, y_min, y_max)
 	
 	return Vector2(pixel_x, pixel_y)
 
+func get_y_position_from_labels(y_value: float, y_min: float, y_max: float) -> float:
+	# Get the actual Y-axis label positions
+	var y_labels = y_axis.get_children()
+	
+	if y_labels.size() < 2:
+		return 0.0
+	
+	# Calculate which segment the value falls into
+	var value_range = y_max - y_min
+	var segments = y_labels.size() - 1
+	var segment_value = value_range / segments
+	
+	# Find which two labels this value falls between
+	var segment_index = (y_max - y_value) / segment_value
+	var lower_index = int(segment_index)
+	var upper_index = lower_index + 1
+	
+	# Clamp to valid range
+	lower_index = clamp(lower_index, 0, y_labels.size() - 1)
+	upper_index = clamp(upper_index, 0, y_labels.size() - 1)
+	
+	if lower_index == upper_index:
+		# Exact match with a label
+		var label = y_labels[lower_index]
+		return label.position.y + (label.size.y / 2)
+	else:
+		# Interpolate between two labels
+		var lower_label = y_labels[lower_index]
+		var upper_label = y_labels[upper_index]
+		
+		var lower_y = lower_label.position.y + (lower_label.size.y / 2)
+		var upper_y = upper_label.position.y + (upper_label.size.y / 2)
+		
+		var interpolation_factor = segment_index - lower_index
+		return lerp(lower_y, upper_y, interpolation_factor)
+
 func update_plotted_coordinates() -> void:
-	for i in line.get_children():
-		if i is Line2D:
+	for i in table.get_children():
+		if i is Line2D or i is Polygon2D:
 			i.queue_free()
 	set_grid()
 	plot_coordinates()
