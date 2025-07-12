@@ -1,9 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cfeime0uakpxe"]
+[gd_scene load_steps=8 format=3 uid="uid://cfeime0uakpxe"]
 
 [ext_resource type="Script" uid="uid://dljt08yxgdcav" path="res://Components/Transaction/add_transaction_panel.gd" id="1_8bee0"]
 [ext_resource type="Texture2D" uid="uid://b8emsptw58mxa" path="res://Assets/profit_icon.png" id="2_6pw3u"]
 [ext_resource type="Script" uid="uid://byanmhpkpb4by" path="res://Components/Transaction/graph_panel.gd" id="2_pvoi1"]
 [ext_resource type="Texture2D" uid="uid://ccsx36q54g7rr" path="res://Assets/loss_icon.png" id="3_pvoi1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jn10g"]
+bg_color = Color(0.282407, 0.282407, 0.282407, 1)
 
 [sub_resource type="Theme" id="Theme_pvoi1"]
 default_font_size = 20
@@ -30,7 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.316785, 0.316785, 0.316785, 0.717647)
+color = Color(0, 0, 0, 0.764706)
 metadata/_edit_lock_ = true
 
 [node name="CreatePanel" type="Panel" parent="."]
@@ -47,6 +50,7 @@ offset_bottom = 280.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_jn10g")
 
 [node name="Layout" type="Panel" parent="CreatePanel"]
 layout_mode = 0
@@ -252,6 +256,7 @@ button_pressed = true
 metadata/_edit_lock_ = true
 
 [node name="TimeOptionBtn" type="OptionButton" parent="CreatePanel/TimePanel"]
+layout_mode = 0
 offset_left = 153.0
 offset_top = 28.0
 offset_right = 217.0
