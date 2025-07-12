@@ -114,6 +114,467 @@ offset_bottom = -92.3201
 grow_horizontal = 1
 grow_vertical = 1
 
+[node name="CandleStickGraph" type="Control" parent="ExpenditureActivities"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="B" type="Panel" parent="ExpenditureActivities/CandleStickGraph"]
+visible = false
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.0781564, 0.0781564, 0.0781564, 1)
+
+[node name="1" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 168.0
+offset_right = 24.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="2" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 168.0
+offset_right = 84.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="4" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 184.0
+offset_right = 36.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="5" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 192.0
+offset_right = 60.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="6" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 64.0
+offset_top = 184.0
+offset_right = 72.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="7" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 200.0
+offset_right = 48.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="8" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 88.0
+offset_top = 200.0
+offset_right = 96.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="9" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 200.0
+offset_right = 108.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="3" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 112.0
+offset_top = 168.0
+offset_right = 120.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="10" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 172.0
+offset_top = 168.0
+offset_right = 180.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="11" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 124.0
+offset_top = 184.0
+offset_right = 132.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="12" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 148.0
+offset_top = 192.0
+offset_right = 156.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="13" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 160.0
+offset_top = 184.0
+offset_right = 168.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="14" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 200.0
+offset_right = 144.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="17" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 220.0
+offset_top = 192.0
+offset_right = 228.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="18" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 184.0
+offset_right = 240.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="19" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 200.0
+offset_right = 216.0
+offset_bottom = 248.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="15" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 184.0
+offset_top = 200.0
+offset_right = 192.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="16" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 196.0
+offset_top = 200.0
+offset_right = 204.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="20" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 244.0
+offset_top = 200.0
+offset_right = 252.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="21" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 140.0
+offset_right = 264.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="22" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 96.0
+offset_right = 324.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="23" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 268.0
+offset_top = 184.0
+offset_right = 276.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="24" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 292.0
+offset_top = 192.0
+offset_right = 300.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="25" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 304.0
+offset_top = 184.0
+offset_right = 312.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="26" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 200.0
+offset_right = 288.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="27" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 364.0
+offset_top = 192.0
+offset_right = 372.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="28" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 164.0
+offset_right = 384.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="29" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 200.0
+offset_right = 360.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="30" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 328.0
+offset_top = 200.0
+offset_right = 336.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="31" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 340.0
+offset_top = 200.0
+offset_right = 348.0
+offset_bottom = 224.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="32" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 388.0
+offset_top = 168.0
+offset_right = 396.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="33" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 168.0
+offset_right = 456.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="34" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 400.0
+offset_top = 184.0
+offset_right = 408.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="35" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 424.0
+offset_top = 192.0
+offset_right = 432.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="36" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 436.0
+offset_top = 184.0
+offset_right = 444.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="37" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 412.0
+offset_top = 200.0
+offset_right = 420.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="38" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 460.0
+offset_top = 200.0
+offset_right = 468.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="39" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 472.0
+offset_top = 200.0
+offset_right = 480.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="40" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = 168.0
+offset_right = 492.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="41" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 544.0
+offset_top = 168.0
+offset_right = 552.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="42" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 496.0
+offset_top = 184.0
+offset_right = 504.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="43" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 520.0
+offset_top = 192.0
+offset_right = 528.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="44" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 532.0
+offset_top = 184.0
+offset_right = 540.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="45" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 508.0
+offset_top = 200.0
+offset_right = 516.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="46" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 592.0
+offset_top = 192.0
+offset_right = 600.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="47" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 604.0
+offset_top = 184.0
+offset_right = 612.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="48" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 580.0
+offset_top = 200.0
+offset_right = 588.0
+offset_bottom = 248.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="49" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 556.0
+offset_top = 200.0
+offset_right = 564.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="50" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 568.0
+offset_top = 200.0
+offset_right = 576.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="51" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 616.0
+offset_top = 200.0
+offset_right = 624.0
+offset_bottom = 232.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
+[node name="52" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 628.0
+offset_top = 140.0
+offset_right = 636.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="54" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 640.0
+offset_top = 184.0
+offset_right = 648.0
+offset_bottom = 200.0
+color = Color(1.39579e-06, 0.787413, 0.118876, 1)
+
+[node name="57" type="ColorRect" parent="ExpenditureActivities/CandleStickGraph"]
+layout_mode = 0
+offset_left = 652.0
+offset_top = 200.0
+offset_right = 660.0
+offset_bottom = 216.0
+color = Color(0.805373, 0.000107476, 0.112056, 1)
+
 [node name="Menu" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 7

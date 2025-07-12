@@ -100,6 +100,7 @@ theme_override_font_sizes/font_size = 20
 text = "+"
 
 [node name="Zoom" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 offset_left = 468.0
 offset_top = 460.0

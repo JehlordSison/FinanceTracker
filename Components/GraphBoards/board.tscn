@@ -237,6 +237,7 @@ offset_bottom = 64.0
 color = Color(0.805373, 0.000107476, 0.112056, 1)
 
 [node name="EditGraph" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
